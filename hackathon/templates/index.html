@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="AI-powered crop rotation and companion planting planner for sustainable farming. Get personalized recommendations for your next crop, companion plants, and irrigation advice." />
+    <title>AI Crop Rotation &amp; Companion Planting Planner</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>" />
+    <!-- Driver.js for Walkthrough -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css" />
+</head>
+
+<body>
+
+    <!-- ===================================================
+         PAGE 1: WELCOME / ONBOARDING
+         =================================================== -->
+    <div class="welcome-page" id="welcomePage">
+        <div class="welcome-card">
+            <span class="welcome-card__logo">🌾</span>
+            <h1 class="welcome-card__title" id="welcomeTitle">AI Crop Rotation &amp; Companion Planting Planner</h1>
+            <p class="welcome-card__subtitle" id="welcomeSub">Choose your language and enter your name to get started.
+            </p>
+
+            <!-- Language Selection Grid -->
+            <div class="lang-grid">
+                <button class="lang-option selected" data-lang="en">
+                    <span class="lang-option__flag">🇬🇧</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">English</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="ta">
+                    <span class="lang-option__flag">🇮🇳</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">தமிழ்</span>
+                        <span class="lang-option__native">Tamil</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="hi">
+                    <span class="lang-option__flag">🇮🇳</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">हिन्दी</span>
+                        <span class="lang-option__native">Hindi</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="es">
+                    <span class="lang-option__flag">🇪🇸</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">Español</span>
+                        <span class="lang-option__native">Spanish</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="fr">
+                    <span class="lang-option__flag">🇫🇷</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">Français</span>
+                        <span class="lang-option__native">French</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="zh">
+                    <span class="lang-option__flag">🇨🇳</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">中文</span>
+                        <span class="lang-option__native">Chinese</span>
+                    </span>
+                </button>
+                <button class="lang-option" data-lang="ar">
+                    <span class="lang-option__flag">🇸🇦</span>
+                    <span class="lang-option__text">
+                        <span class="lang-option__name">العربية</span>
+                        <span class="lang-option__native">Arabic</span>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Name Input -->
+            <div class="welcome-field">
+                <label for="userName" id="welcomeLblName">Your Name</label>
+                <input type="text" id="userName" placeholder="Enter your name" autocomplete="name" />
+            </div>
+
+            <!-- Start Button -->
+            <button class="btn-primary" id="welcomeBtn">
+                <span id="welcomeBtnText">Get Started</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===================================================
+         PAGE 2: MAIN APPLICATION
+         =================================================== -->
+    <div class="app-page" id="appPage">
+
+        <!-- Top Navigation Bar -->
+        <nav class="topnav">
+            <a class="topnav__brand" href="#">
+                <span class="topnav__brand-icon">🌾</span>
+                <span id="navBrandText">CropPlanner AI</span>
+            </a>
+            <div class="topnav__right">
+                <span class="topnav__greeting" id="navGreeting">Welcome, <strong>User</strong></span>
+                <button class="topnav__tour" id="startTourBtn">🚀 Take a Tour</button>
+                <button class="topnav__lang-switch" id="navLangBtn">🌐 Language</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-inner">
+                <span class="hero-inner__badge" id="heroBadge">� AI-Powered Agriculture</span>
+                <h1 class="hero-inner__title" id="heroTitle">Smart Farming Starts Here</h1>
+                <p class="hero-inner__subtitle" id="heroSub">Get AI-powered crop rotation advice, companion planting
+                    suggestions, and weather-based irrigation tips — all in seconds.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat__number" id="stat1Num">10+</div>
+                        <div class="hero-stat__label" id="stat1Label">Crops Supported</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat__number" id="stat2Num">7</div>
+                        <div class="hero-stat__label" id="stat2Label">Soil Types</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat__number" id="stat3Num">3</div>
+                        <div class="hero-stat__label" id="stat3Label">Seasons</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Strip -->
+        <div class="features-strip">
+            <div class="feature-item">
+                <span class="feature-item__icon">🔄</span>
+                <div class="feature-item__title" id="feat1Title">Crop Rotation</div>
+                <div class="feature-item__desc" id="feat1Desc">Know what to plant next for healthier soil.</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-item__icon">🤝</span>
+                <div class="feature-item__title" id="feat2Title">Companion Planting</div>
+                <div class="feature-item__desc" id="feat2Desc">Grow crops that help each other thrive.</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-item__icon">💧</span>
+                <div class="feature-item__title" id="feat3Title">Smart Irrigation</div>
+                <div class="feature-item__desc" id="feat3Desc">Watering advice based on your season &amp; crop.</div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <section class="section">
+            <span class="section__label" id="formLabel">📋 PLAN YOUR FIELD</span>
+            <h2 class="section__title" id="formTitle">Enter Your Farm Details</h2>
+            <p class="section__subtitle" id="formSub">Select your current crop, soil type, season and city to get
+                personalized recommendations.</p>
+
+            <div class="planner-card">
+                <form id="plannerForm" novalidate>
+                    <div class="form-grid">
+                        <!-- Current Crop -->
+                        <div class="form-group">
+                            <label for="currentCrop" id="lblCrop">
+                                <span class="icon">🌱</span> Current Crop
+                            </label>
+                            <select id="currentCrop" name="currentCrop">
+                                <option value="">— Select Crop —</option>
+                                <option value="Rice">Rice</option>
+                                <option value="Wheat">Wheat</option>
+                                <option value="Corn">Corn</option>
+                                <option value="Soybean">Soybean</option>
+                                <option value="Cotton">Cotton</option>
+                                <option value="Sugarcane">Sugarcane</option>
+                                <option value="Tomato">Tomato</option>
+                                <option value="Potato">Potato</option>
+                                <option value="Onion">Onion</option>
+                                <option value="Groundnut">Groundnut</option>
+                            </select>
+                        </div>
+
+                        <!-- Soil Type -->
+                        <div class="form-group">
+                            <label for="soilType" id="lblSoil">
+                                <span class="icon">🪨</span> Soil Type
+                            </label>
+                            <select id="soilType" name="soilType">
+                                <option value="">— Select Soil —</option>
+                                <option value="Alluvial">Alluvial</option>
+                                <option value="Black">Black (Regur)</option>
+                                <option value="Red">Red Soil</option>
+                                <option value="Laterite">Laterite</option>
+                                <option value="Sandy">Sandy</option>
+                                <option value="Clay">Clay</option>
+                                <option value="Loamy">Loamy</option>
+                            </select>
+                        </div>
+
+                        <!-- Season -->
+                        <div class="form-group">
+                            <label for="season" id="lblSeason">
+                                <span class="icon">☀️</span> Season
+                            </label>
+                            <select id="season" name="season">
+                                <option value="">— Select Season —</option>
+                                <option value="Kharif"> (Jun–Oct)</option>
+                                <option value="Rabi"> (Nov–Mar)</option>
+                                <option value="Zaid"> (Apr–Jun)</option>
+                            </select>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group">
+                            <label for="city" id="lblCity">
+                                <span class="icon">🏙️</span> City
+                            </label>
+                            <input type="text" id="city" name="city" placeholder="e.g. Hyderabad, Pune, Delhi" />
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <span class="btn-icon">🌿</span>
+                            <span id="btnSubmitText">Get Recommendation</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Loader -->
+        <div id="loaderWrap" class="loader-wrap">
+            <div class="loader"></div>
+            <p class="loader-text" id="loaderText">Analyzing your farm data…</p>
+        </div>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section">
+            <span class="section__label" id="resultLabel">📊 YOUR RESULTS</span>
+            <h2 class="section__title" id="resultTitle">Here's What We Suggest for Your Farm</h2>
+
+            <!-- Suggestion Banner -->
+            <div class="suggestion-banner compat-good" id="suggestionBanner">
+                <span class="suggestion-banner__icon">💬</span>
+                <div class="suggestion-banner__content">
+                    <div class="suggestion-banner__title" id="lblSuggestion">Our Suggestion</div>
+                    <div class="suggestion-banner__text" id="valSuggestion">—</div>
+                </div>
+            </div>
+
+            <!-- Compatibility Row -->
+            <div class="compat-row">
+                <div class="compat-card">
+                    <span class="compat-card__icon">🏆</span>
+                    <div class="compat-card__label" id="lblSoilMatch">Best Soil for Your Crop</div>
+                    <div class="compat-card__value" id="valSoilMatch">—</div>
+                </div>
+                <div class="compat-card">
+                    <span class="compat-card__icon">🌾</span>
+                    <div class="compat-card__label" id="lblCropMatch">Best Crops for Your Soil</div>
+                    <div class="compat-card__value" id="valCropMatch">—</div>
+                </div>
+            </div>
+
+            <!-- City-Based Recommendation -->
+            <div class="compat-row" id="cityRecommendationBanner" style="display:none;">
+                <div class="compat-card" style="border-left: 4px solid #10b981;">
+                    <span class="compat-card__icon">🏙️</span>
+                    <div class="compat-card__label" id="lblCityBestCrops">Best Crops for Your City</div>
+                    <div class="compat-card__value" id="valCityBestCrops">—</div>
+                </div>
+                <div class="compat-card" style="border-left: 4px solid #3b82f6;">
+                    <span class="compat-card__icon">🌤️</span>
+                    <div class="compat-card__label" id="lblCityWeather">City Weather Info</div>
+                    <div class="compat-card__value" id="valCityWeather">—</div>
+                </div>
+            </div>
+
+            <!-- Crop-City Mismatch Recommendation -->
+            <div id="cropCityMismatchBanner" class="suggestion-banner compat-bad" style="display:none;">
+                <span class="suggestion-banner__icon">⚠️</span>
+                <div class="suggestion-banner__content">
+                    <div class="suggestion-banner__title" id="lblCropCityMismatch">Crop Not Ideal for Your City</div>
+                    <div class="suggestion-banner__text" id="valCropCityMismatch">—</div>
+                </div>
+            </div>
+
+            <!-- Crop Suggestion for City -->
+            <div id="cityCropSuggestionBanner" class="suggestion-banner compat-good" style="display:none;">
+                <span class="suggestion-banner__icon">💡</span>
+                <div class="suggestion-banner__content">
+                    <div class="suggestion-banner__title" id="lblCityCropSuggestion">Recommended Crops for Your City
+                    </div>
+                    <div class="suggestion-banner__text" id="valCityCropSuggestion">—</div>
+                </div>
+            </div>
+
+            <!-- Main Result Cards -->
+            <div class="results-grid">
+                <div class="result-card highlight">
+                    <span class="result-card__icon">🔄</span>
+                    <p class="result-card__label" id="lblNextCrop">What to Grow Next</p>
+                    <p class="result-card__value" id="valNextCrop">—</p>
+                    <p class="result-card__duration" id="valNextCropDuration"
+                        style="font-size: 0.85rem; color: var(--gray-500); margin-top: 4px;">—</p>
+                    <button id="btnLongTerm" class="btn-primary"
+                        style="margin-top: 12px; width: 100%; padding: 8px; font-size: 0.8rem; background: var(--green-700);">
+                        <span id="btnLongTermText">Plan Strategy</span>
+                    </button>
+                </div>
+                <div class="result-card highlight">
+                    <span class="result-card__icon">🤝</span>
+                    <p class="result-card__label" id="lblCompanion">Best Crop to Grow Together</p>
+                    <p class="result-card__value" id="valCompanion">—</p>
+                    <p class="result-card__duration" id="valCompanionDuration"
+                        style="font-size: 0.85rem; color: var(--gray-500); margin-top: 4px;">—</p>
+
+                    <!-- Custom Companion Navigation Button -->
+                    <button id="btnGoCustomCompanion" class="btn-primary"
+                        style="margin-top: 12px; width: 100%; padding: 8px; font-size: 0.8rem; background: var(--green-700);">
+                        <span id="btnGoCustomCompanionText">Find Custom Companion</span>
+                    </button>
+                </div>
+                <div class="result-card">
+                    <span class="result-card__icon">🌡️</span>
+                    <p class="result-card__label" id="lblTemp">Expected Weather</p>
+                    <p class="result-card__value" id="valTemperature">—</p>
+                </div>
+                <div class="result-card">
+                    <span class="result-card__icon">💧</span>
+                    <p class="result-card__label" id="lblHumidity">Moisture in Air</p>
+                    <p class="result-card__value" id="valHumidity">—</p>
+                </div>
+                <div class="result-card">
+                    <span class="result-card__icon">🚿</span>
+                    <p class="result-card__label" id="lblWatering">Watering Guide</p>
+                    <p class="result-card__value" id="valIrrigation">—</p>
+                </div>
+                <div class="result-card highlight">
+                    <span class="result-card__icon">💡</span>
+                    <p class="result-card__label" id="lblTip">Helpful Farming Tip</p>
+                    <p class="result-card__value" id="valTip">—</p>
+                </div>
+            </div>
+
+            <!-- Crop-City Mismatch Recommendation Banner -->
+            <div id="cropCityMismatchBannerSecondary" style="display:none;" class="mismatch-banner">
+                <div class="mismatch-banner__icon">🚨</div>
+                <div class="mismatch-banner__body">
+                    <div class="mismatch-banner__title" id="lblCropMismatchSecond">⚠️ Crop Not Ideal for Your City</div>
+                    <div class="mismatch-banner__warning" id="valMismatchWarning">—</div>
+                    <div class="mismatch-banner__recommend" id="valMismatchRecommend">—</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================
+             PAGE 4: LONG-TERM PLAN
+             =================================================== -->
+        <div class="plan-page" id="planPage"
+            style="display:none; padding: 40px 24px; animation: fadeSlideIn 0.5s ease;">
+            <div class="section" style="max-width: 800px; padding: 0;">
+                <button class="btn-secondary" id="backToResults"
+                    style="margin-bottom: 24px; padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--gray-300); background: var(--white); cursor: pointer; font-family: var(--font); font-weight: 600;">←
+                    Back to Results</button>
+
+                <header class="plan-header" style="margin-bottom: 24px;">
+                    <span class="section__label" id="planLabel">📅 SUSTAINABLE FUTURE</span>
+                    <h2 class="section__title" id="planTitle">Rotation Strategy</h2>
+                    <p class="section__subtitle" id="planSub">Optimizing soil health and seasonal yield.</p>
+                </header>
+
+                <!-- Farm Detail Summary -->
+                <div id="farmDetailSummary" class="farm-summary" style="margin-bottom: 30px;">
+                    <div class="farm-summary__item">
+                        <span class="farm-summary__label" id="lblSumCrop">Crop</span>
+                        <span class="farm-summary__value" id="valSumCrop">—</span>
+                    </div>
+                    <div class="farm-summary__item">
+                        <span class="farm-summary__label" id="lblSumSoil">Soil</span>
+                        <span class="farm-summary__value" id="valSumSoil">—</span>
+                    </div>
+                    <div class="farm-summary__item">
+                        <span class="farm-summary__label" id="lblSumCity">City</span>
+                        <span class="farm-summary__value" id="valSumCity">—</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Year Input -->
+                <div class="year-input-control"
+                    style="margin-bottom: 32px; text-align: center; background: white; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--gray-200);">
+                    <label for="rotationYears" id="lblRotationYears"
+                        style="display: block; font-weight: 700; color: var(--green-800); margin-bottom: 12px;">Plan for
+                        Years:</label>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                        <input type="number" id="rotationYears" value="3" min="1" max="5"
+                            style="width: 70px; padding: 10px; border-radius: var(--radius); border: 2px solid var(--green-200); text-align: center; font-size: 1.1rem; font-weight: 800; color: var(--green-700);">
+                        <button id="btnUpdatePlan" class="btn-primary"
+                            style="width: auto; padding: 10px 20px; background: var(--green-700);">
+                            <span id="btnUpdatePlanText">Update Plan</span>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="timeline" id="timelineContainer">
+                    <!-- Timeline items injected by JS -->
+                </div>
+
+                <div class="plan-footer" style="margin-top: 48px;">
+                    <div class="suggestion-banner compat-good">
+                        <span class="suggestion-banner__icon">💡</span>
+                        <div class="suggestion-banner__content">
+                            <div class="suggestion-banner__title">Pro Tip</div>
+                            <div class="suggestion-banner__text" id="finalTip">Rotate between deep-rooted and
+                                shallow-rooted crops to maintain soil structure.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================
+             PAGE 5: CUSTOM COMPANION PAGE
+             =================================================== -->
+        <div class="companion-page" id="companionPage"
+            style="display:none; padding: 40px 24px; animation: fadeSlideIn 0.5s ease;">
+            <div class="section" style="max-width: 600px; padding: 0; margin: 0 auto;">
+                <button class="btn-secondary" id="backToResultsFromCompanion"
+                    style="margin-bottom: 24px; padding: 8px 16px; border-radius: var(--radius); border: 1px solid var(--gray-300); background: var(--white); cursor: pointer; font-family: var(--font); font-weight: 600;">←
+                    Back to Results</button>
+
+                <header class="plan-header" style="margin-bottom: 30px; text-align: center;">
+                    <span class="section__label" id="companionPageLabel">🤝 PERFECT PAIRING</span>
+                    <h2 class="section__title" id="companionPageTitle">Custom Companion Crop</h2>
+                    <p class="section__subtitle" id="companionPageSub">Select a specific crop and soil type to find the
+                        ideal symbiotic partner.</p>
+                </header>
+
+                <div class="planner-card" style="box-shadow: var(--shadow-md);">
+                    <div class="form-grid" style="grid-template-columns: 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="customCompCropPage" id="lblCustomCompCropPage" style="font-size: 0.9rem;">
+                                <span class="icon">🌱</span> Crop
+                            </label>
+                            <select id="customCompCropPage" style="padding: 12px; font-size: 1rem;">
+                                <option value="">Select Crop</option>
+                                <option value="Rice">Rice</option>
+                                <option value="Wheat">Wheat</option>
+                                <option value="Corn">Corn</option>
+                                <option value="Soybean">Soybean</option>
+                                <option value="Cotton">Cotton</option>
+                                <option value="Sugarcane">Sugarcane</option>
+                                <option value="Tomato">Tomato</option>
+                                <option value="Potato">Potato</option>
+                                <option value="Onion">Onion</option>
+                                <option value="Groundnut">Groundnut</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customCompSoilPage" id="lblCustomCompSoilPage" style="font-size: 0.9rem;">
+                                <span class="icon">🪨</span> Soil
+                            </label>
+                            <select id="customCompSoilPage" style="padding: 12px; font-size: 1rem;">
+                                <option value="">Select Soil</option>
+                                <option value="Alluvial">Alluvial</option>
+                                <option value="Black">Black (Regur)</option>
+                                <option value="Red">Red Soil</option>
+                                <option value="Laterite">Laterite</option>
+                                <option value="Sandy">Sandy</option>
+                                <option value="Clay">Clay</option>
+                                <option value="Loamy">Loamy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions" style="margin-top: 24px;">
+                        <!-- UNIQUE BUTTON STYLING -->
+                        <button id="btnFetchCustomCompanionPage" class="btn-primary"
+                            style="width: 100%; padding: 8px; font-size: 0.8rem; background: var(--green-700); display: flex; justify-content: center; align-items: center; gap: 8px;">
+                            <span class="icon">✨</span>
+                            <span id="btnFetchCustomCompanionTextPage">Get Combination</span>
+                        </button>
+                    </div>
+
+                    <!-- Custom Result Area -->
+                    <div id="customCompanionResultPage"
+                        style="display: none; margin-top: 30px; border-top: 2px dashed var(--green-200); padding-top: 24px; text-align: center;">
+                        <p style="font-size: 0.85rem; color: var(--gray-500); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;"
+                            id="lblResultCompanionPage">Recommended Companion</p>
+                        <p class="result-card__value" id="valCustomCompanionPage"
+                            style="font-size: 2rem; color: var(--green-700); margin-bottom: 4px;">—</p>
+                        <p class="result-card__duration" id="valCustomCompanionDurationPage"
+                            style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 16px;">—</p>
+                        <div class="suggestion-banner compat-good" style="text-align: left;">
+                            <span class="suggestion-banner__icon">💡</span>
+                            <div class="suggestion-banner__content">
+                                <div class="suggestion-banner__title" id="lblBenefitTitlePage">Why it works</div>
+                                <div class="suggestion-banner__text" id="valCustomCompanionBenefitPage"
+                                    style="font-size: 0.95rem; line-height: 1.5;"><!-- Benefit text --></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer__text" id="footerMsg">
+                <span class="icon">🌍</span> Sustainable Farming for a Better Future
+            </p>
+            <p class="footer__sub">AI Crop Rotation &amp; Companion Planting Planner &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
